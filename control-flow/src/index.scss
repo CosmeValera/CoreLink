@@ -1,0 +1,104 @@
+:root {
+  font-size: 12px;
+}
+
+/////////////////////////////////
+//// Switch Enable animation ////
+/////////////////////////////////
+@keyframes loading-switch {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+
+.mif-loading {
+
+  &:not(.p-inputswitch-checked) {
+    .p-inputswitch-slider::before {
+      content: "";
+      display: block;
+      box-sizing: border-box;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      border-color: #fff transparent #fff transparent;
+      background-color: transparent;
+      animation: loading-switch 0.5s linear infinite ;
+    }
+  }
+
+  &.p-inputswitch-checked {
+    .p-inputswitch-slider::before {
+      content: "";
+      transform: translateX(0);
+      transition: transform 0s;
+      left: 1.50rem;
+      display: block;
+      box-sizing: border-box;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      border-color: #fff transparent #fff transparent;
+      background-color: transparent;
+      animation: loading-switch 0.5s linear infinite;
+    }
+  }
+}
+//// END: Switch Enable animation ////
+
+/////////////////////////////////////////////
+//// GRID SYSTEM BASED ON CONTAINER SIZE ////
+/////////////////////////////////////////////
+// It's needed to have grid based on container because mfs do not depend on screen size //
+.grid {
+  container-type: inline-size;
+
+  // Extra Small (xs)
+  @for $i from 1 through 12 {
+    &>.cq-#{$i} {
+      width: calc(($i * 100cqw) / 12);
+    }
+
+    &>.cq-xs-#{$i} {
+      width: calc(($i * 100cqw) / 12);
+    }
+  }
+
+  // Small (sm)
+  @for $i from 1 through 12 {
+    &>.cq-sm-#{$i} {
+      @container (min-width: 576px) {
+        width: calc(($i * 100cqw) / 12);
+      }
+    }
+  }
+
+  // Medium (md)
+  @for $i from 1 through 12 {
+    &>.cq-md-#{$i} {
+      @container (min-width: 768px) {
+        width: calc(($i * 100cqw) / 12);
+      }
+    }
+  }
+
+  // Large (lg)
+  @for $i from 1 through 12 {
+    &>.cq-lg-#{$i} {
+      @container (min-width: 992px) {
+        width: calc(($i * 100cqw) / 12);
+      }
+    }
+  }
+
+  // Extra Large (xl)
+  @for $i from 1 through 12 {
+    &>.cq-xl-#{$i} {
+      @container (min-width: 1200px) {
+        width: calc(($i * 100cqw) / 12);
+      }
+    }
+  }
+}
+//// END: GRID SYSTEM BASED ON CONTAINER SIZE ////

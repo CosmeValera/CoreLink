@@ -1,0 +1,60 @@
+@import 'style/themes/gmv-theme/variables';
+
+//////////////////////////////
+//// Material React Table ////
+//////////////////////////////
+
+//// TABLE ROW ////
+tbody tr.MuiTableRow-root.css-h2wjal-MuiTableRow-root {
+  background-color: rgba(52, 52, 52, 0.2)!important;
+}
+tr.MuiTableRow-root.Mui-selected td::after {
+  background-color: rgba(104,104,104, 0.4);
+}
+tr.MuiTableRow-root.Mui-selected:hover td::after {
+  background-color: rgba(104,104,104, 0.6);
+}
+
+td span.MuiButtonBase-root.MuiCheckbox-root, 
+td span.MuiButtonBase-root.MuiCheckbox-root {
+  color: $secondaryGray;
+}
+td span.MuiButtonBase-root.MuiCheckbox-root.Mui-checked, 
+td span.MuiButtonBase-root.MuiCheckbox-root.MuiCheckbox-indeterminate,
+div span.MuiButtonBase-root.MuiCheckbox-root.Mui-checked,
+div span.MuiButtonBase-root.MuiCheckbox-root.MuiCheckbox-indeterminate {
+  color: map-get($colors, "green");
+}
+//// END: TABLE ROW ////
+
+
+//// TOOLTIP ////
+.tooltip.p-tooltip {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+  
+  .p-tooltip-arrow {
+    opacity: 0;
+  }
+  
+  .p-tooltip-text {
+    background-color: dimgray;
+    color: white;
+    opacity: 95%;
+    font-size: 0.75rem;
+    border-radius: 9999px;
+    padding: 5px 10px;
+  }
+  
+  @keyframes fadeIn {
+    75% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+//// END: TOOLTIP ////
+
+//// END: Material React Table ////

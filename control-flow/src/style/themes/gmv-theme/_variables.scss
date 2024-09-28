@@ -1,0 +1,87 @@
+$primaryColor: #DF0024;
+$primaryDarkColor: #860015;
+$primaryDarkerColor: #360008;
+$primaryTextColor: #F6F6F6;
+
+$secondaryColor: #191919;
+$secondaryLightColor: #252525;
+$secondaryLighterColor: #373737;
+
+$primaryGradient: linear-gradient(-90deg, $primaryDarkColor, $primaryColor);
+
+$colors: (
+    "blue": #2196F3,
+    "green": #21CB38,
+    "yellow": #F9B235,
+    "cyan": #00BCD4,
+    "pink": #E91E63,
+    "indigo": #3F51B5,
+    "teal": #009688,
+    "orange": #FA6400,
+    "bluegray": #607D8B,
+    "purple": #9C27B0,
+    "red": #DF0024,
+    "primary": $primaryColor
+);
+
+// Mandatory Designer Variables
+@import './variables/general';
+@import './variables/form';
+@import './variables/button';
+@import './variables/panel';
+@import './variables/_data';
+@import './variables/_overlay';
+@import './variables/_message';
+@import './variables/_menu';
+@import './variables/_media';
+@import './variables/_misc';
+
+:root {
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --surface-a:#ffffff;
+    --surface-b:#f8f9fa;
+    --surface-c:#e9ecef;
+    --surface-d:#dee2e6;
+    --surface-e:#ffffff;
+    --surface-f:#ffffff;
+    --text-color:#495057;
+    --text-color-secondary:#6c757d;
+    --primary-color: #{$primaryColor};
+    --primary-color-text:#ffffff;
+    --surface-0: #191919;
+    --surface-50: #252525;
+    --surface-100: #373737;
+    --surface-200: #595959;
+    --surface-300: #717171;
+    --surface-400: #898989;
+    --surface-500: #a0a0a0;
+    --surface-600: #b8b8b8;
+    --surface-700: #d0d0d0;
+    --surface-800: #e7e7e7;
+    --surface-900: #ffffff;
+    --gray-50: #e7e7e7;
+    --gray-100: #d0d0d0;
+    --gray-200: #b8b8b8;
+    --gray-300: #a0a0a0;
+    --gray-400: #898989;
+    --gray-500: #717171;
+    --gray-600: #595959;
+    --gray-700: #373737;
+    --gray-800: #252525;
+    --gray-900: #191919;
+    --content-padding:#{$panelContentPadding};
+    --inline-spacing:#{$inlineSpacing};
+    --border-radius:#{$borderRadius};
+    --surface-ground:#191919;
+    --surface-section:#252525;
+    --surface-card:#373737;
+    --surface-overlay:#262626;
+    --surface-border:hsla(0,0%,100%,.12);
+    --surface-hover:hsla(0,0%,100%,.04);
+    --focus-ring: #{$focusShadow};
+    --maskbg: #{$maskBg};
+    --highlight-bg: #{$highlightBg};
+    --highlight-text-color: #{$highlightTextColor};
+    color-scheme: dark;
+}
