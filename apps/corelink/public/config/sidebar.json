@@ -1,85 +1,34 @@
 [
   {
-    "name": "Local Example",
+    "name": "Control Flow",
     "items": [
       {
-        "name": "ExampleRemote",
-        "component": "grafana_mfe/ExampleRemote",
-        "url": "http://localhost:3001/remoteEntry.js",
-        "customProps": {}
-      }
-    ]
-  },
-  {
-    "name": "Local Satellite",
-    "items": [
-      {
-        "name": "Local Single-satellite monitoring",
-        "component": "satellite_mfe/SatellitePicked",
+        "name": "CF 316",
+        "component": "tc_spacon_mission_interface_microfrontend/TcSpaconMissionInterfaceMain",
         "url": "http://localhost:3002/remoteEntry.js",
-        "customProps": {}
+        "customProps": { "satellite": "316"}
       },
       {
-        "name": "Local Fleet Monitoring",
-        "component": "satellite_mfe/FleetMonitoring",
+        "name": "CF No Satellite",
+        "component": "tc_spacon_mission_interface_microfrontend/TcSpaconMissionInterfaceMain",
         "url": "http://localhost:3002/remoteEntry.js",
-        "customProps": {}
+        "customProps": { "satellite": null }
+      },
+      {
+        "name": "CF Not avaible",
+        "component": "tc_spacon_mission_interface_microfrontend/TcSpaconMissionInterfaceMain",
+        "url": "http://localhost:3002/remoteEntry.js",
+        "customProps": { "satellite": "Imaginary satellite"}
       }
     ]
   },
   {
-    "name": "Local Grafana",
+    "name": "System Lens",
     "items": [
       {
-        "name": "FDF - Graph",
-        "component": "grafana_mfe/GrafanaRemote",
-        "url": "http://localhost:3001/remoteEntry.js",
-        "customProps": { "src": "http://localhost:6060/d-solo/fdmjva7j6u9z4c/demo-db?orgId=1&from=1716428249431&to=1716447799545&panelId=1" }
-      },
-      {
-        "name": "FDF - Stat",
-        "component": "grafana_mfe/GrafanaRemote",
-        "url": "http://localhost:3001/remoteEntry.js",
-        "customProps": { "src": "http://localhost:6060/d-solo/fdmjva7j6u9z4c/demo-db?orgId=1&from=1716428249431&to=1716447799545&panelId=2" }
-      },
-      {
-        "name": "FDF - Gauge",
-        "component": "grafana_mfe/GrafanaRemote",
-        "url": "http://localhost:3001/remoteEntry.js",
-        "customProps": { "src": "http://localhost:6060/d-solo/fdmjva7j6u9z4c/demo-db?orgId=1&from=1716428249431&to=1716447799545&panelId=3" }
-      }
-    ]
-  },
-  {
-    "name": "MONICO",
-    "items": [
-      {
-        "name": "FDF - CPU Usage",
-        "component": "grafana_mfe/GrafanaRemote",
-        "url": "https://aggregator-sv:3001/remoteEntry.js",
-        "customProps": { "src": "https://monico-sv-bastion-v/grafana/d-solo/t5s86JtVz/fdf-overview?orgId=1&refresh=1m&from=1724066692189&to=1724153092189&panelId=12" }
-      },
-      {
-        "name": "FDF - Core services",
-        "component": "grafana_mfe/GrafanaRemote",
-        "url": "https://aggregator-sv:3001/remoteEntry.js",
-        "customProps": { "src": "https://monico-sv-bastion-v/grafana/d-solo/t5s86JtVz/fdf-overview?orgId=1&refresh=1m&from=now-2m&to=now&panelId=95" }
-      }
-    ]
-  },
-  {
-    "name": "Satellite",
-    "items": [
-      {
-        "name": "Single-satellite monitoring",
-        "component": "satellite_mfe/SatellitePicked",
-        "url": "https://aggregator-sv:3002/remoteEntry.js",
-        "customProps": {}
-      },
-      {
-        "name": "Fleet Monitoring",
-        "component": "satellite_mfe/FleetMonitoring",
-        "url": "https://aggregator-sv:3002/remoteEntry.js",
+        "name": "System Lens Panel",
+        "component": "sccf_system_supervisor_microfrontend/SystemSupervisorMain",
+        "url": "http://localhost:3003/remoteEntry.js",
         "customProps": {}
       }
     ]
