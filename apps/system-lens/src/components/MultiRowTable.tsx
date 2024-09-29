@@ -2,14 +2,13 @@ import React, { useState, useEffect, useMemo, ReactText, ReactNode, useRef } fro
 
 import { Tag } from 'primereact/tag';
 import { Tooltip } from 'primereact/tooltip';
-import { Badge } from 'primereact/badge';
 import { Toast } from 'primereact/toast';
 
 import { MRT_AggregationFn, MRT_ColumnDef, MRT_RowSelectionState, MRT_TablePagination, MaterialReactTable, getMRT_RowSelectionHandler, useMaterialReactTable } from 'material-react-table';
 import { Box, Button, darken } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-import { fetchGetAllDomains, fetchPostAction } from '../service/fetchService';
+import { fetchGetAllDomains } from '../service/fetchService';
 import { useAdaptiveCardHeight } from '../helpers/useAdaptiveCardHeight';
 
 interface ProcessSumary {
