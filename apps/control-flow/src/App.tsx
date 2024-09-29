@@ -19,7 +19,7 @@ async function deferRender() {
     const root = ReactDOM.createRoot(rootElement);
     root.render(
         // <React.StrictMode>
-            <Main satellite="GEN"/>
+            <Main satellite="316"/>
         // </React.StrictMode>,
     );
 // })

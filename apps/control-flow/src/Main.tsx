@@ -9,10 +9,9 @@ import 'primeicons/primeicons.css';
 import "./index.scss";
 import "./hide-overlay.scss";
 
-import { isSatelliteNull, isSatelliteAvailable, isSatelliteGEN } from './helpers/validSatellite';
+import { isSatelliteNull, isSatelliteAvailable } from './helpers/validSatellite';
 import MifProvider from './provider/MifProvider';
 import DomainPage from './pages/DomainPage';
-import DomainGENPage from './pages/DomainGENPage';
 import ErrorPage from './pages/ErrorPage';
 
 const Main = (props: {satellite: string}) => {
@@ -25,10 +24,6 @@ const Main = (props: {satellite: string}) => {
       return <ErrorPage text="Satellite not available :_("/>
     }
     
-    if(isSatelliteGEN(props.satellite)) {
-      return <DomainGENPage satellite={props.satellite}/>
-    }
-
     return <DomainPage satellite={props.satellite}/>
   })
 

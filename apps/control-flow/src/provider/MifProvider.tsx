@@ -34,7 +34,7 @@ export default function MifProvider({children, domain} : MifProviderProps) {
         const filteredResStc = data.filter((instance: {key: string, value: string, readOnly: boolean}) => regexStc.test(instance.key));
         const filteredNavPrs = data.filter((instance: {key: string, value: string, readOnly: boolean}) => instance.key.endsWith("NAVPRS"));
         const filteredResStm = data.filter((instance: {key: string, value: string, readOnly: boolean}) => instance.key.startsWith("STM"));
-      
+    
         setDataMm(filteredResMm);
         setDataStc(filteredResStc);
         setDataNavPrs(filteredNavPrs);

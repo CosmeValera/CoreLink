@@ -42,7 +42,9 @@ const AppHeader = () => {
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
           <TimeIconStyled width={16} height={16} />
-          <Typography variant="subtitle2">2021-11-01T06:40:43.485Z</Typography>
+          <Typography variant="subtitle2">
+            {`${new Date().toLocaleDateString('en-SP', { day: 'numeric', month: 'long', year: 'numeric' })} | ${new Date().toLocaleTimeString('en-SP', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })}`}
+          </Typography>
         </Box>
         <Divider />
         {/* REVIEW this should be a button */}
