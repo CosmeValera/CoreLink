@@ -1,0 +1,88 @@
+body {
+  --common-black: #000000;
+  --common-white: #ffffff;
+  --common-clear: #FFFFFF0;
+
+  --primary-main: #4d6aff;
+  --primary-light: #8094ff;
+  --primary-dark: #003480;
+
+  --secondary-main: #1a8ea1;
+  --secondary-light: #4dcdc6;
+  --secondary-dark: #136977;
+
+  --grey-50: #f9fafa;
+  --grey-100: #f4f5f6;
+  --grey-200: #eceeef;
+  --grey-300: #dee2e3;
+  --grey-400: #b7c0c2;
+  --grey-500: #96a2a6;
+  --grey-600: #6c7a7f;
+  --grey-700: #596569;
+  --grey-800: #3d4548;
+  --grey-900: #001026;
+  --grey-a100: #d3d8d9;
+  --grey-a200: #a4aeb2;
+  --grey-a400: #596569;
+  --grey-a700: #2d3334;
+
+  /* common aliases */
+  /* IDEA use base color variables */
+  --foreground-primary: #ffffffdf;
+  --foreground-contrast-primary: #ffffffde;
+  --foreground-secondary: #ffffff9a;
+  --foreground-contrast-secondary: #ffffff99;
+  --foreground-disabled: #00102661;
+  --foreground-contrast-disabled: #ffffff61;
+
+  --background-header: #001025;
+  --background-bar-dark: #090a1b;
+  --background-bar-medium: #16172c;
+  --background-default: #1c1d35;
+  --background-light: #ffffff14;
+  --background-paper: #353646;
+
+  --action-active: #0054b647;
+  --action-contrast-active: #ffffff7a;
+  --action-hover: #8094ff48;
+  --action-contrast-hover: #ffffff14;
+  --action-selected: #0054b629;
+  --action-contrast-selected: #ffffff29;
+  --action-disabled: #00000042;
+  --action-contrast-disabled: #ffffff42;
+
+  --other-divider: #0000001f;
+  --other-outlined-border: #0000003b;
+  --other-backdrop-overlay: #00000080;
+  --other-filled-input-background: #00000017;
+  --other-standard-input-line: #0000006b;
+  --other-snackbar: #2d3334;
+
+  /* status & severity */
+  --critical-main: #e31b0c;
+  --critical-light: #f88078;
+  --critical-dark: #ba1408;
+
+  --serious-main: #ed6c02;
+  --serious-light: #ffb547;
+  --serious-dark: #bb5a00;
+
+  --caution-main: #fbe20e;
+  --caution-light: #fdf082;
+  --caution-dark: #b4a203;
+  --caution-contrast-text: #00000099;
+
+  --normal-main: #299e2e;
+  --normal-light: #7bc67e;
+  --normal-dark: #3b873e;
+
+  --standby-main: #2196f3;
+  --standby-light: #64b6f7;
+  --standby-dark: #0b79d0;
+
+  --off-main: #9ea7ad;
+  --off-light: #d6d9dc;
+  --off-dark: #6a7177;
+
+  --tabs-background: #ffffff14;
+}

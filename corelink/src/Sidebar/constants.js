@@ -1,4 +1,0 @@
-export const SIDEBAR_WIDTH = {
-  COLLAPSED: 64,
-  EXPANDED: 264,
-}

@@ -1,0 +1,162 @@
+.flexlayout__layout,
+.flexlayout__floating_window_content {
+  --font-family: inherit;
+  --font-size: 0.75rem;
+
+  --color-background: var(--background-paper, #353646);
+  // NOTE only used for `more` icon, which we have not customized
+  --color-icon: var(--foreground-primary, #001026de);
+  --color-text: var(--foreground-primary, #001026de);
+  --color-overflow: var(--foreground-primary, #001026de);
+
+  --color-tabset-background: var(--background-bar-medium, #16172c);
+  --color-tabset-background-selected: transparent; //var(--background-paper, #353646);
+  --color-tabset-background-maximized: var(--background-paper, #353646);
+  --color-tabset-divider-line: var(--background-paper, #353646);
+
+  --color-tab-unselected-background: #e0e0e0; // REVIEW
+  --color-tab-unselected: var(--foreground-secondary, #00102699);
+
+  --color-tab-selected-background: var(--background-paper, #353646);
+  --color-tab-selected: var(--foreground-primary, #001026de);
+
+  --color-splitter: transparent;
+  // REVIEW use different colors for hover and drag states on splitter?
+  --color-splitter-hover: var(--action-hover);
+  --color-splitter-drag: var(--background-bar-medium, #323353);
+
+  --color-popup-border: var(--background-paper, #353646);
+  --color-popup-unselected: var(--foreground-primary, #001026de);
+  --color-popup-unselected-background: var(--background-paper, #353646);
+}
+
+.flexlayout__layout {
+  overflow: visible;
+}
+
+/* popup menu */
+.flexlayout__popup_menu_container {
+  padding: 8px 0px;
+  border: 0px;
+  border-radius: 4px;
+  box-shadow:
+    0px 3px 14px 2px rgba(0, 0, 0, 0.12),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0px 5px 5px -3px rgba(0, 0, 0, 0.2);
+}
+
+.flexlayout__popup_menu_item {
+  padding: 6px 16px;
+
+  &:hover {
+    background-color: var(--action-hover, #0054b614);
+  }
+}
+
+/* tabset */
+
+.flexlayout__tabset_tabbar_inner_tab_container_top {
+  border-top: 0px;
+}
+
+.flexlayout__tabset_tabbar_inner_tab_container {
+  padding: 0px 0px 1px 0px;
+}
+
+.flexlayout__tabset_tabbar_outer_top {
+  border-bottom: 0px;
+}
+
+.flexlayout__tabset {
+  border-radius: 8px;
+}
+
+.flexlayout__tabset_tab_divider {
+  width: 1px;
+}
+
+.flexlayout__tabset_content {
+  background-color: var(--color-background);
+  border-radius: 0px 0px 8px 8px;
+}
+
+/* tab */
+
+.flexlayout__tab {
+  border-radius: 0px 0px 8px 8px;
+}
+
+.flexlayout__tabset_tab_divider {
+  display: none;
+}
+
+.flexlayout__tab_button {
+  background-color: transparent;
+  height: 32px;
+  line-height: 1;
+  min-width: 132px;
+  justify-content: space-between;
+  font-weight: 500;
+
+  &:only-child {
+    padding-left: 16px;
+
+    .flexlayout__tab_button_trailing {
+      display: none;
+    }
+  }
+
+  &:not(:only-child) {
+    padding: 4px 4px 4px 8px;
+
+    &.flexlayout__tab_button--selected {
+      color: var(--foreground-secondary);
+      background-color: var(--background-light);
+      border-bottom: 1px solid var(--primary-main);
+    }
+
+    .flexlayout__tab_button_trailing {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background-color: var(--action-hover);
+      }
+    }
+  }
+}
+
+.flexlayout__tab_toolbar {
+  gap: 8px;
+  padding: 0 8px;
+
+  & > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+}
+
+.flexlayout__tabset {
+  &:has(.flexlayout__tabset-selected) {
+    outline: 2px solid var(--primary-light);
+  }
+}
+
+.flexlayout__tab_button:hover {
+  background-color: var(--action-hover) !important;
+}
+
+.flexlayout__tab_toolbar_button:hover {
+  background-color: var(--action-hover);
+}
+
+.flexlayout__tab_button_trailing {
+  visibility: visible;
+}
