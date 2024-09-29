@@ -12,6 +12,7 @@ import "./hide-overlay.scss";
 import MultiRowTable from "./components/MultiRowTable";
 
 const Main = (props: {satellites: string[]}) => {
+  console.log(props)
   return (
     <PrimeReactProvider value={{ ripple: true }}>
       <main>
