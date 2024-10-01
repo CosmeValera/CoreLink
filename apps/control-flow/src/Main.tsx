@@ -17,11 +17,11 @@ import ErrorPage from './pages/ErrorPage';
 const Main = (props: {satellite: string}) => {
   const pageToRender = (() => {
     if (isSatelliteNull(props.satellite)) {
-      return <ErrorPage text="No satellite!" />;
+      return <ErrorPage text="No Submarine!" />;
     }
 
     if (!isSatelliteAvailable(props.satellite)) {
-      return <ErrorPage text="Satellite not available :_("/>
+      return <ErrorPage text="Submarine not available :_("/>
     }
     
     return <DomainPage satellite={props.satellite}/>
