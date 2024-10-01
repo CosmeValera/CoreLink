@@ -56,7 +56,7 @@ export const PANEL_NAMES: PanelNames = {
 }
 
 export const DEFAULT_VIEW: DefaultView = {
-  name: 'Untitled view',
+  name: 'View',
   // NOTE single-satellite views should specify a value here
   satellite: undefined,
   layout: {
