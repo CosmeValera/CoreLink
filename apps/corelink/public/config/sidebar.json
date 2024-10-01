@@ -9,6 +9,12 @@
         "customProps": { "satellite": "316"}
       },
       {
+        "name": "CF 262",
+        "component": "tc_spacon_mission_interface_microfrontend/TcSpaconMissionInterfaceMain",
+        "url": "http://localhost:3002/remoteEntry.js",
+        "customProps": { "satellite": "262"}
+      },
+      {
         "name": "CF No Satellite",
         "component": "tc_spacon_mission_interface_microfrontend/TcSpaconMissionInterfaceMain",
         "url": "http://localhost:3002/remoteEntry.js",

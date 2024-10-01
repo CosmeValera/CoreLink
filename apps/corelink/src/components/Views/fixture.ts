@@ -68,10 +68,28 @@ export const DEFAULT_VIEW: DefaultView = {
 
 export const views: DefineViews[] = [
   {
-    name: 'Default views',
+    name: 'Views',
     items: [
       {
-        name: 'Default M&C View',
+        name: '🚧 Views section coming soon 🚧',
+        layout: {
+          type: 'row',
+          children: [
+            {
+              type: 'tabset',
+              weight: 100,
+              children: [
+                {
+                  type: 'tab',
+                  name: ''
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        name: 'Sonar Monitoring',
         layout: {
           type: 'row',
           weight: 100,
@@ -147,7 +165,7 @@ export const views: DefineViews[] = [
         },
       },
       {
-        name: 'Sysadmin View',
+        name: 'Nav. Overview',
         layout: {
           type: 'row',
           children: [
@@ -195,7 +213,7 @@ export const views: DefineViews[] = [
         },
       },
       {
-        name: 'Procurement View',
+        name: 'Communications',
         layout: {
           type: 'row',
           children: [
@@ -242,7 +260,7 @@ export const views: DefineViews[] = [
         },
       },
       {
-        name: 'MONICO',
+        name: 'Submarine Systems',
         layout: {
           type: 'row',
           weight: 100,

@@ -95,7 +95,7 @@ const SidebarListItem: React.FC<SidebarListItemProps> = ({ text, children, ...re
   )
 }
 
-const DrawerContents:React.FC<DrawerContentsProps> = ({ items, onClick, onDragStart }) => {
+const DrawerContents:React.FC<DrawerContentsProps> = ({ items, onClick, onDragStart, disabled = false }) => {
   return items.map((group) => (
     <Accordion
       key={group.name}
@@ -118,6 +118,7 @@ const DrawerContents:React.FC<DrawerContentsProps> = ({ items, onClick, onDragSt
           },
           transition: 'none',
           '&:hover': { backgroundColor: 'action.hover' },
+          opacity: disabled ? 0.5 : 1 
         }}
       >
         <Typography>{group.name}</Typography>
@@ -130,11 +131,12 @@ const DrawerContents:React.FC<DrawerContentsProps> = ({ items, onClick, onDragSt
               sx={{
                 height: 35,
                 p: '4px 32px',
-                cursor: 'pointer',
+                cursor: disabled ? 'default' : 'pointer',
                 '&:hover': { backgroundColor: 'action.hover' },
+                opacity: disabled ? 0.5 : 1 
               }}
               draggable={Boolean(onDragStart)}
-              onClick={onClick ? (ev) => onClick(item, ev) : undefined}
+              onClick={!disabled && onClick ? (ev) => onClick(item, ev) : undefined}
               onDragStart={
                 onDragStart ? (ev) => {onDragStart(item, ev)} : undefined
               }
@@ -172,7 +174,7 @@ const PanelList = () => {
 
 const ViewList = () => {
   const { addView } = useViews()
-  return <DrawerContents items={views} onClick={addView} />
+  return <DrawerContents items={views} onClick={addView} disabled/>
 }
 
 // IDEA use mini-drawer instead?
@@ -238,18 +240,18 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
           }}
         >
           <SidebarListItem
-            text="Views"
-            selected={section === SECTIONS.VIEWS}
-            onClick={() => onSectionClick(SECTIONS.VIEWS)}
-          >
-            <ViewsIcon width={20} height={20} />
-          </SidebarListItem>
-          <SidebarListItem
             text="Panels"
             selected={section === SECTIONS.PANELS}
             onClick={() => onSectionClick(SECTIONS.PANELS)}
           >
             <PanelsIcon width={20} height={20} />
+          </SidebarListItem>
+          <SidebarListItem
+            text="Views"
+            selected={section === SECTIONS.VIEWS}
+            onClick={() => onSectionClick(SECTIONS.VIEWS)}
+          >
+            <ViewsIcon width={20} height={20} />
           </SidebarListItem>
           <SidebarListItem
             text="Alerts"
