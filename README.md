@@ -1,81 +1,61 @@
-# Turborepo starter
+# 🌊 Corelink Submarine Tracking System
+Corelink is an advanced maritime platform built to monitor and manage submarine operations. Built on a React-based Turborepo monorepo architecture, Corelink dynamically loads microfrontends to provide real-time, modular updates from various submarine systems. The platform is highly flexible, allowing new components to be added easily through a dynamic federation setup.
 
-This is an official starter Turborepo.
+## 🚀 Getting Started
+To get started with Corelink, follow these simple steps:
 
-## Using this example
-
-Run the following command:
-
+1. Clone the repository.
+2. Run the following command in the root directory:
 ```sh
-npx create-turbo@latest
+npm install
 ```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
+3. Once dependencies are installed, launch the project with:
+```sh
+npm start
 ```
-cd my-turborepo
-pnpm build
-```
+That's it! Everything else is already configured for you. The Corelink app and all its components will be up and running.
 
-### Develop
+## ⚙️ Project Structure
+**Corelink** is a React-based monorepo using Turborepo to manage its three key applications:
 
-To develop all apps and packages, run the following command:
+- **Corelink (Kernel)**: the core app acts as the kernel, dynamically loading microfrontends via module federation. 
 
-```
-cd my-turborepo
-pnpm dev
-```
+- **System Lens** (MFe): exposes information about the processes and status inside the submarines.
 
-### Remote Caching
+- **Control Flow** (MFe): focuses on operational flow and control of submarine systems.
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+## 📦 Modular Design with Dynamic Microfrontends
+Corelink's dynamic module federation simplifies system updates and expansion:
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+- **Dynamic Microfrontend Loading**: New microfrontends can be added by editing the `sidebar.json` file, allowing seamless integration of external apps without code changes.
 
-```
-cd my-turborepo
-npx turbo login
-```
+- **Drag and Drop**: Panels from Control Flow or System Lens can be freely moved, resized, and positioned for a customizable workspace.
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+- **Resizing**: Users can adjust panel sizes to focus on specific data, enhancing control over submarine operations.
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## 🛠 Turborepo Setup
+The Corelink platform uses **Turborepo** for managing the three applications in the monorepo:
 
-```
-npx turbo link
-```
+- **Simplifies package management**: Only one npm install is needed from the root.
+- **Speeds up development**: Built-in tools for running and building multiple projects simultaneously.
+- **Consistency**: Shared dependencies and workspace scripts ensure all microfrontends work seamlessly together.
 
-## Useful Links
+## ⚙️ Future-Proof and Scalable
+The flexibility of dynamically adding microfrontends ensures Corelink is future-proof. This approach allows for:
 
-Learn more about the power of Turborepo:
+- **Scalability**: New microfrontends can be added without modifying the core codebase.
+- **Ease of Maintenance**: Updates to individual microfrontends do not affect the overall platform stability.
+- **Rapid Deployment**: Teams can focus on developing new features while Corelink automatically integrates them.
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+## 📷 Images
+### System lens
+![alt text](utils/readme_images/SL.png)
+
+### Control Flow
+![alt text](utils/readme_images/CF.png)
+
+### SL and CF and Sidebar
+![alt text](utils/readme_images/CFandSL.png)
+
+### Drag and Resize capabilities
+![alt text](utils/readme_images/Mix.png)
