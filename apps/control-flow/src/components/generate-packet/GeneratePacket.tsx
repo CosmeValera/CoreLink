@@ -8,7 +8,7 @@ export default function GeneratePacket() {
         <div className="card flex justify-content-center">
 			<Toast ref={toast} />
             <Button label="Generate Packet" rounded onClick={()=>{
-                toast.current?.show({ severity: 'success', summary: 'Succesful packet', detail: <p>Packet generated succesfully for submarine <strong>316</strong>!</p>, life: 3000 });
+                toast.current?.show({ severity: 'success', summary: 'Succesful packet', detail: <p>Packet generated succesfully!</p>, life: 3000 });
             }}/>
         </div>
     )
