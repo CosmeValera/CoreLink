@@ -20,7 +20,7 @@ describe('GET Requests', () => {
             const data = await response.json();
             const firstSatellite = data[0];
 
-            expect(firstSatellite.name).toBe('CPDTM');
+            expect(firstSatellite.name).toBe('DSUBTM');
             expect(firstSatellite.status).toBe('RUNNING');
         });
     });
