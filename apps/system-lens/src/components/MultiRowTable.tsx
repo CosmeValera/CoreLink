@@ -5,7 +5,7 @@ import { Tooltip } from 'primereact/tooltip';
 import { Toast } from 'primereact/toast';
 
 import { MRT_AggregationFn, MRT_ColumnDef, MRT_RowSelectionState, MRT_TablePagination, MaterialReactTable, getMRT_RowSelectionHandler, useMaterialReactTable } from 'material-react-table';
-import { Box, Button, darken } from '@mui/material';
+import { Box, Button, darken, PaletteMode } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import { fetchGetAllDomains, fetchPostAction } from '../service/fetchService';
