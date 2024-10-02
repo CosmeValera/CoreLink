@@ -101,7 +101,7 @@ export default function StcBuffer(props: BufferProps) {
                         accept={formik.submitForm}
                         rejectClassName="border-primary"
                         style={{ width: '30vw' }}
-                        breakpoints={{ '1100px': '75vw', '960px': '100vw' }}
+                        breakpoints={{ '1200px': '40vw', '768px': '60vw' }}
                     />
                     <Dropdown
                         inputId="buffer"
@@ -133,7 +133,6 @@ export default function StcBuffer(props: BufferProps) {
                 </form>      
             </div>
         </>
-        
     )
 }
 function setChecked(checked: any) {

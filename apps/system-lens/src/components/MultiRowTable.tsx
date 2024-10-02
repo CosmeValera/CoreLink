@@ -244,7 +244,7 @@ export default function MultiRowTable(props: { domains: string[] }) {
 				const selectedRowsNamesAndDomains = selectedRows.map(row => ({ domain: row.original.domain, name: row.original.name, }));
 				const processesNames = selectedRowsNamesAndDomains.map(({ name }) => name).join(', ');
 				
-				toast.current?.show({ severity: 'info', summary: 'Error', detail: <p>{action} succesful: <strong>{processesNames}</strong></p>, life: 3000 });
+				toast.current?.show({ severity: 'info', summary: 'Info', detail: <p>{action} succesful: <strong>{processesNames}</strong></p>, life: 3000 });
 
 				// try {
 				// 	await makePostCall(action, selectedRowsNamesAndDomains);

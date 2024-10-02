@@ -43,33 +43,33 @@ export default function SwitchEnable(props: SwitchEnableProps) {
 
     return (
         <>
-        <ConfirmDialog
-            visible={visible}
-            onHide={() => setVisible(false)}
-            message={`Are you sure you want to change ${props.configuration} state?`}
-            header="Confirmation"
-            icon="pi pi-exclamation-triangle"
-            accept={handleSwitch}
-            rejectClassName="border-primary"
-            style={{ width: '30vw' }}
-            breakpoints={{ '1100px': '75vw', '960px': '100vw' }}
-        />
-        <div className="flex align-items-center">
-            <p className="w-15rem"> {props.configuration} </p>
-            <div className="flex align-items-center gap-3" >
-                <InputSwitch
-                    disabled={loading || props.disabled}
-                    checked={!!checked}
-                    onChange={(e: InputSwitchChangeEvent) => setVisible(true)}
-                    className={loading ? "mif-loading" : ""}
-                />
-                {error &&
-                    <>
-                        <Tooltip target=".tooltip-msg" content="MIF API error" className="fadeinright animation-ease-out animation-duration-200"/>
-                        <Message severity="error" className="tooltip-msg fadeinright animation-ease-out animation-duration-200 border-circle" />
-                    </>}
+            <ConfirmDialog
+                visible={visible}
+                onHide={() => setVisible(false)}
+                message={`Are you sure you want to change ${props.configuration} state?`}
+                header="Confirmation"
+                icon="pi pi-exclamation-triangle"
+                accept={handleSwitch}
+                rejectClassName="border-primary"
+                style={{ width: '30vw' }}
+                breakpoints={{ '1200px': '40vw', '768px': '60vw' }}
+            />
+            <div className="flex align-items-center">
+                <p className="w-15rem"> {props.configuration} </p>
+                <div className="flex align-items-center gap-3" >
+                    <InputSwitch
+                        disabled={loading || props.disabled}
+                        checked={!!checked}
+                        onChange={(e: InputSwitchChangeEvent) => setVisible(true)}
+                        className={loading ? "mif-loading" : ""}
+                    />
+                    {error &&
+                        <>
+                            <Tooltip target=".tooltip-msg" content="MIF API error" className="fadeinright animation-ease-out animation-duration-200"/>
+                            <Message severity="error" className="tooltip-msg fadeinright animation-ease-out animation-duration-200 border-circle" />
+                        </>}
+                </div>
             </div>
-        </div>
         </>
     );
 }
