@@ -93,7 +93,7 @@ module.exports = (_, argv) => ({
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "iov_aggregator_release",
+      name: "corelink",
       filename: "remoteEntry.js",
       remotes: {
       },

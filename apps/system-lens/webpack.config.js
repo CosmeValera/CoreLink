@@ -9,7 +9,7 @@ const printCompilationMessage = require('./compilation.config.js');
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:3003/",
+    publicPath: "http://localhost:3001/",
   },
 
   resolve: {
@@ -17,7 +17,7 @@ module.exports = (_, argv) => ({
   },
 
   devServer: {
-    port: 3003,
+    port: 3001,
     historyApiFallback: true,
     watchFiles: [path.resolve(__dirname, 'src')],
     onListening: function (devServer) {
@@ -66,11 +66,11 @@ module.exports = (_, argv) => ({
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "sccf_system_supervisor_microfrontend",
+      name: "system_lens",
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-        "./SystemSupervisorMain": "./src/Main"
+        "./SystemLensMain": "./src/Main"
       },
       shared: {
         ...deps,

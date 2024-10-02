@@ -1,5 +1,5 @@
 {
-  "name": "iov-sccf-mif-microfrontend",
+  "name": "control-flow",
   "version": "1.0.0",
   "scripts": {
     "start": "webpack serve --mode development",

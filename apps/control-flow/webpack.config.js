@@ -66,11 +66,11 @@ module.exports = (_, argv) => ({
 
   plugins: [
     new ModuleFederationPlugin({
-      name: 'tc_spacon_mission_interface_microfrontend',
+      name: 'control_flow',
       filename: 'remoteEntry.js',
       remotes: {},
       exposes: {
-        './TcSpaconMissionInterfaceMain': './src/Main'
+        './ControlFlowMain': './src/Main'
       },
       shared: {
         ...deps,

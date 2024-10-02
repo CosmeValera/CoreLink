@@ -1,5 +1,5 @@
 {
-  "name": "iov_aggregator_release",
+  "name": "corelink",
   "version": "1.0.0",
   "scripts": {
     "start": "webpack serve --mode development",

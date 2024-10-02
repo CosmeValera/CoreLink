@@ -1,5 +1,5 @@
 {
-  "name": "sccf-system-supervisor_microfrontend",
+  "name": "system-lens",
   "version": "1.0.0",
   "scripts": {
     "start": "webpack serve --mode development",

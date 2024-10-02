@@ -4,19 +4,19 @@
     "items": [
       {
         "name": "CF 316",
-        "component": "tc_spacon_mission_interface_microfrontend/TcSpaconMissionInterfaceMain",
+        "component": "control_flow/ControlFlowMain",
         "url": "http://localhost:3002/remoteEntry.js",
         "customProps": { "satellite": "316"}
       },
       {
         "name": "CF 262",
-        "component": "tc_spacon_mission_interface_microfrontend/TcSpaconMissionInterfaceMain",
+        "component": "control_flow/ControlFlowMain",
         "url": "http://localhost:3002/remoteEntry.js",
         "customProps": { "satellite": "262"}
       },
       {
         "name": "CF No Submarine",
-        "component": "tc_spacon_mission_interface_microfrontend/TcSpaconMissionInterfaceMain",
+        "component": "control_flow/ControlFlowMain",
         "url": "http://localhost:3002/remoteEntry.js",
         "customProps": { "satellite": "Imaginary satellite"}
       }
@@ -27,8 +27,8 @@
     "items": [
       {
         "name": "System Lens Panel",
-        "component": "sccf_system_supervisor_microfrontend/SystemSupervisorMain",
-        "url": "http://localhost:3003/remoteEntry.js",
+        "component": "system_lens/SystemLensMain",
+        "url": "http://localhost:3001/remoteEntry.js",
         "customProps": { "satellites": ["316"]}
       }
     ]
