@@ -57,34 +57,39 @@ export default function MifProvider({children, domain} : MifProviderProps) {
         return { loading, dataStm, error };
     }
 
-    const patchMifVariable = async (key: string, value: string, dom: string = domain) => {
-        console.log("patchMifVariable thrown");
+    // const patchMifVariable = async (key: string, value: string, dom: string = domain) => {
+    //     console.log("patchMifVariable thrown");
         
-        const headers = {
-            'Authorization': token,
-            'Content-Type': 'application/json'
-        };
-        const patchData = {
-            key: key,
-            value: value
-        }
-        return fetch(`http://localhost:4040/api/tcSpaconMissionInterface/${dom}`, {method: 'PATCH', headers, body: JSON.stringify(patchData)})
-        .then((res) => {
-            console.log("first then in patchMifVariable.", res);
-            if (!res.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return res.json();
-            // return mockData;
-        })
-        .then((res) => {
-            console.log("second then in patchMifVariable.", res);
-            return true;
-        })
-        .catch((err) => {
-            console.log("catch error", err)
-            return false;
-        });
+    //     const headers = {
+    //         'Authorization': token,
+    //         'Content-Type': 'application/json'
+    //     };
+    //     const patchData = {
+    //         key: key,
+    //         value: value
+    //     }
+    //     return fetch(`http://localhost:4040/api/tcSpaconMissionInterface/${dom}`, {method: 'PATCH', headers, body: JSON.stringify(patchData)})
+    //     .then((res) => {
+    //         console.log("first then in patchMifVariable.", res);
+    //         if (!res.ok) {
+    //             throw new Error('Network response was not ok');
+    //         }
+    //         return res.json();
+    //         // return mockData;
+    //     })
+    //     .then((res) => {
+    //         console.log("second then in patchMifVariable.", res);
+    //         return true;
+    //     })
+    //     .catch((err) => {
+    //         console.log("catch error", err)
+    //         return false;
+    //     });
+    // }
+
+    const patchMifVariable = async (key: string, value: string, dom: string = domain) => {
+        await new Promise(resolve => setTimeout(resolve, 10));
+        return true;
     }
 
     const fetchCheckIsFile = async (file: string, dom: string = domain ) => {
