@@ -28,6 +28,7 @@ That's it! Everything else is already configured for you. The Corelink app and a
 ## 📷 Images
 ### Empty
 Initial state of the Corelink platform before any microfrontends are loaded.
+
 ![Empty Corelink app](utils/readme_images/empty.png)
 
 ### Sidebar
@@ -60,10 +61,10 @@ This image illustrates the platform’s drag-and-resize feature, enabling users 
 
 🔍 Dive in and explore the system! 🌊
 
-## Architecture Overview
+## 🏗️ Architecture Overview
 The following sections explore Corelink’s design and functionality for those wanting to dive deeper into the platform’s architecture and modularity.
 
-## 📦 Modular Design with Dynamic Microfrontends
+### 📦 Modular Design with Dynamic Microfrontends
 Corelink's dynamic module federation simplifies system updates and expansion:
 
 - **Dynamic Microfrontend Loading**: New microfrontends can be added by editing the `sidebar.json` file, allowing seamless integration of external apps without code changes.
@@ -72,14 +73,14 @@ Corelink's dynamic module federation simplifies system updates and expansion:
 
 - **Resizing**: Users can adjust panel sizes to focus on specific data, enhancing control over submarine operations.
 
-## 🛠 Turborepo Setup
+### 🛠 Turborepo Setup
 The Corelink platform uses **Turborepo** for managing the three applications in the monorepo:
 
 - **Simplifies package management**: Only one npm install is needed from the root.
 - **Speeds up development**: Built-in tools for running and building multiple projects simultaneously.
 - **Consistency**: Shared dependencies and workspace scripts ensure all microfrontends work seamlessly together.
 
-## 🌱 Future-Proof and Scalable
+### 🌱 Future-Proof and Scalable
 The flexibility of dynamically adding microfrontends ensures Corelink is future-proof. This approach allows for:
 
 - **Scalability**: New microfrontends can be added without modifying the core codebase.
