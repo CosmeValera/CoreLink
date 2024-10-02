@@ -225,8 +225,9 @@ const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
             color: 'foreground.contrastPrimary',
             borderBottom: 1,
             borderBottomColor: 'background.barMedium',
-            backgroundColor: 'brand.primary',
+            backgroundColor: 'brand.barDark',
             mb: 4,
+            padding: '8px'
           }}
         >
           <Logo />

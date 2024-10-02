@@ -4,9 +4,6 @@ import ReactDOM from 'react-dom/client';
 import Main from './Main';
 
 async function deferRender() {
-    // if (process.env.NODE_ENV !== 'development') {
-    //   return
-    // }
     const { worker } = await import('./mocks/browser.js');
     return worker.start();
 }
@@ -18,8 +15,6 @@ async function deferRender() {
     }
     const root = ReactDOM.createRoot(rootElement);
     root.render(
-        // <React.StrictMode>
-            <Main satellite="316"/>
-        // </React.StrictMode>,
+        <Main satellite="316"/>
     );
 // })
