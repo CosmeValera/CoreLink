@@ -31,9 +31,9 @@ export default function StcBuffer(props: BufferProps) {
     const [visible, setVisible] = useState(false);
 
     const stcBufferOptions: BufferOption[] = [
-        { number: '6', name: 'M-KMF Buffer' },
-        { number: '10', name: 'P-KMF Buffer' },
-        { number: '9', name: 'GCS-KMF Buffer' },
+        { number: '6', name: 'Sonar Ping Buffer' },
+        { number: '10', name: 'Acoustic Command Buffer' },
+        { number: '9', name: 'Telemetry Buffer' },
         { number: '0', name: 'All buffers' },
     ];
 
@@ -90,12 +90,12 @@ export default function StcBuffer(props: BufferProps) {
     return (
         <>
             <div className="flex align-items-center">
-                <p className='w-13rem'>STC Buffer</p>          
+                <p className='w-13rem'>{props.configuration}</p>          
                 <form onSubmit={formik.handleSubmit} className="flex justify-content-start flex-grow-1 gap-3">
                     <ConfirmDialog
                         visible={visible}
                         onHide={() => setVisible(false)}
-                        message={`Are you sure you want to change ${props.configuration} state?`}
+                        message={`Are you sure you want to flush ${props.configuration} state?`}
                         header="Confirmation"
                         icon="pi pi-exclamation-triangle"
                         accept={formik.submitForm}

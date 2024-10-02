@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Fieldset } from 'primereact/fieldset';
 import SwitchEnable from '../../shared/SwitchEnable';
-import NavPrsForce from './force/NavPrsForce';
+import NavPositioningForce from './force/NavPoisitioningForce';
 import { useApp } from '../../provider/MifProvider';
 
-export default function NavPrs(props: { className?: string, height?: number }) {
+export default function NavPositioning(props: { className?: string, height?: number }) {
     const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
     const { getNavPrsValues, patchMifVariable} = useApp();
     const { loading, dataNavPrs, error } = getNavPrsValues();
@@ -23,7 +23,7 @@ export default function NavPrs(props: { className?: string, height?: number }) {
     return (
         <div className={`card gap-2 ${props.className}`}>
             <Fieldset
-                legend="NAV/PRS Configuration"
+                legend="NAV/Positioning Configuration"
                 toggleable
                 onCollapse={() => setIsCollapsed(true)}
                 onExpand={() => setIsCollapsed(false)}
@@ -35,7 +35,7 @@ export default function NavPrs(props: { className?: string, height?: number }) {
                 <div className="grid grid-nogutter">
                     <div className="cq-6">
                         <SwitchEnable
-                            configuration='NAV/PRS data'
+                            configuration='NAV Data'
                             configurationApi='CMD_MINT_RELEASE_NAVPRS'
                             checked={isNavPrsEnabled}
                             loading={loading}
@@ -45,7 +45,7 @@ export default function NavPrs(props: { className?: string, height?: number }) {
                         />
                     </div>
                 </div>
-                <NavPrsForce enable={isNavPrsEnabled}/>
+                <NavPositioningForce enable={isNavPrsEnabled}/>
             </Fieldset>
         </div>
     )

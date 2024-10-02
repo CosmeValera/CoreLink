@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Fieldset } from 'primereact/fieldset';
 import SwitchEnable from '../../shared/SwitchEnable';
-import StmPacket from './stm-content/StmPacket';
-import StmTcpIp from './stm-content/StmTcpIp';
+import OpsPacket from './ops-content/OpsPacket';
+import OpsTcpIp from './ops-content/OpsTcpIp';
 import { useApp } from '../../provider/MifProvider';
 
-export default function Stm(props: { className?: string }) {
+export default function Ops(props: { className?: string }) {
     const { getStmValues, patchMifVariable} = useApp();
     const { loading, dataStm, error } = getStmValues();
     const [stmMap, setStmMap] = useState<Record<string, string | boolean>>({});
@@ -62,14 +62,14 @@ export default function Stm(props: { className?: string }) {
     
     return (
         <div className={`card ${props.className}`}>
-            <Fieldset legend="STM Configuration" toggleable className='m-2' pt={{
+            <Fieldset legend="Ops Configuration" toggleable className='m-2' pt={{
                 content: { className: 'py-0' },
             }}>
                 <div className="grid grid-nogutter">
                     <div className="cq-12 cq-xl-6 grid grid-nogutter">
                         <div className="cq-12 flex align-items-end">
                             <SwitchEnable 
-                                configuration='STM Transmission'
+                                configuration='Nav System Transmission'
                                 configurationApi="STM_PROCESSING"
                                 checked={!!stmMap["STM_PROCESSING"]} 
                                 loading={loading}
@@ -79,7 +79,7 @@ export default function Stm(props: { className?: string }) {
                         </div>
                         <div className="cq-6">
                             <SwitchEnable 
-                                configuration='STM Forwarding M-KMF' 
+                                configuration='Sonar Data Forwarding' 
                                 configurationApi="STM_MKMF_PROCESSING"
                                 checked={!!stmMap["STM_MKMF_PROCESSING"]} 
                                 loading={loading}
@@ -88,7 +88,7 @@ export default function Stm(props: { className?: string }) {
                                 callbackPatch={patchMifVariable}
                                 onToggle={handleOtherSwitchChange}/>
                             <SwitchEnable 
-                                configuration='STM Forwarding P-KMF' 
+                                configuration='Acoustic Data Forwarding' 
                                 configurationApi="STM_PKMF_PROCESSING"
                                 checked={!!stmMap["STM_PKMF_PROCESSING"]} 
                                 loading={loading}
@@ -97,7 +97,7 @@ export default function Stm(props: { className?: string }) {
                                 callbackPatch={patchMifVariable}
                                 onToggle={handleOtherSwitchChange}/>
                             <SwitchEnable 
-                                configuration='STM Forwarding GCS-KMF' 
+                                configuration='Telemetry Data Forwarding' 
                                 configurationApi="STM_SKMF_PROCESSING"
                                 checked={!!stmMap["STM_SKMF_PROCESSING"]} 
                                 loading={loading}
@@ -107,23 +107,23 @@ export default function Stm(props: { className?: string }) {
                                 onToggle={handleOtherSwitchChange}/>
                         </div>
                         <div className="cq-6">
-                            <StmPacket
-                                configuration='Last STM M-KMF packet'
+                            <OpsPacket
+                                configuration='Last Sonar Data Packet'
                                 date={`${stmMap["STM_MKMF_LAST_PACKET_TIME"] ?? 'No date available'}`}
                                 className='mr-3'/>
-                            <StmPacket
-                                configuration='Last STM P-KMF packet'
+                            <OpsPacket
+                                configuration='Last Acoustic Command Packet'
                                 date={`${stmMap["STM_PKMF_LAST_PACKET_TIME"] ?? 'No date available'}`}
                                 className='mr-3'/>
-                            <StmPacket
-                                configuration='Last STM GCS-KMF packet'
+                            <OpsPacket
+                                configuration='Last Telemetry Packet'
                                 date={`${stmMap["STM_SKMF_LAST_PACKET_TIME"] ?? 'No date available'}`}
                                 className='mr-3'/>
                         </div>
                     </div>
 
                     <div className="cq-12 cq-xl-6">
-                        <StmTcpIp
+                        <OpsTcpIp
                             configuration={tcpIPMap}
                             loading={loading}
                         />

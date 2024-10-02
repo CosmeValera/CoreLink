@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Fieldset } from 'primereact/fieldset';
 import SwitchEnable from '../../shared/SwitchEnable';
-import StcBuffer from './stc-content/StcBuffer';
-import StcTcpIp from './stc-content/StcTcpIp';
+import CommsBuffer from './comms-content/CommsBuffer';
+import CommsTcpIp from './comms-content/CommsTcpIp';
 import { useApp } from '../../provider/MifProvider';
 
 export default function Stc(props: { className?: string }) {
@@ -35,13 +35,13 @@ export default function Stc(props: { className?: string }) {
 
     return (
         <div className={`card ${props.className}`}>
-            <Fieldset legend="STC Configuration" toggleable className='m-2' pt={{
+            <Fieldset legend="Comms Configuration" toggleable className='m-2' pt={{
                 content: { className: 'py-0' },
             }}>
                 <div className="grid grid-nogutter">
                     <div className="cq-6">
                         <SwitchEnable
-                            configuration="STC Reception"
+                            configuration="Radio Reception"
                             configurationApi="CMD_MINT_RECEIVE_STC"
                             checked={!!stcMap["CMD_MINT_RECEIVE_STC"]}
                             loading={loading}
@@ -50,7 +50,7 @@ export default function Stc(props: { className?: string }) {
                             onToggle={handleSwitchChange}
                         />
                         <SwitchEnable
-                            configuration="STC Uplk M-KMF"
+                            configuration="Sonar Uplink (Ping)"
                             configurationApi="CMD_MINT_RELEASE_MKMF_STC"
                             checked={!!stcMap["CMD_MINT_RELEASE_MKMF_STC"]}
                             loading={loading}
@@ -59,7 +59,7 @@ export default function Stc(props: { className?: string }) {
                             onToggle={handleSwitchChange}
                         />
                         <SwitchEnable
-                            configuration="STC Uplk P-KMF"
+                            configuration="Acoustic Uplink (Control)"
                             configurationApi="CMD_MINT_RELEASE_PKMF_STC"
                             checked={!!stcMap["CMD_MINT_RELEASE_PKMF_STC"]}
                             loading={loading}
@@ -68,7 +68,7 @@ export default function Stc(props: { className?: string }) {
                             onToggle={handleSwitchChange}
                         />
                         <SwitchEnable
-                            configuration="STC Uplk GCS-KMF"
+                            configuration="Satellite Uplink (Telemetry)"
                             configurationApi="CMD_MINT_RELEASE_SKMF_STC"
                             checked={!!stcMap["CMD_MINT_RELEASE_SKMF_STC"]}
                             loading={loading}
@@ -76,8 +76,8 @@ export default function Stc(props: { className?: string }) {
                             callbackPatch={patchMifVariable}
                             onToggle={handleSwitchChange}
                         />
-                        <StcBuffer
-                            configuration="STC Buffer"
+                        <CommsBuffer
+                            configuration="Comms Buffer"
                             configurationApi="CMD_KMF_STC_FLUSH_BUFFER"
                             actualBuffer={stcMap["CMD_KMF_STC_FLUSH_BUFFER"]}
                             loading={loading}
@@ -87,7 +87,7 @@ export default function Stc(props: { className?: string }) {
                         />
                     </div>
                     <div className="cq-6">
-                        <StcTcpIp configuration={tcpIPMap} loading={loading}/>
+                        <CommsTcpIp configuration={tcpIPMap} loading={loading}/>
                     </div>
                 </div>
 

@@ -3,7 +3,7 @@ import SwitchEnable from '../../shared/SwitchEnable';
 import { Fieldset } from 'primereact/fieldset';
 import { useApp } from '../../provider/MifProvider';
 
-export default function MMsatStat(props: { className?: string }) {
+export default function SubSysStat(props: { className?: string }) {
     const { getMMsatStatValues, patchMifVariable} = useApp();
     const { loading, dataMm, error } = getMMsatStatValues();
     const [MMsatStatMap, setMMsatStatMap] = useState<Record<string, string | boolean>>({});
@@ -24,13 +24,13 @@ export default function MMsatStat(props: { className?: string }) {
 
     return (
         <div className={`card ${props.className}`}>
-            <Fieldset legend="MMsatStat Configuration" toggleable className='m-2' pt={{
+            <Fieldset legend="SubSysStat Configuration" toggleable className='m-2' pt={{
                 content: { className: 'py-0' },
             }}>
                 <div className="grid grid-nogutter">
                     <div className="cq-6 cq-xs-12 cq-sm-8">
                         <SwitchEnable
-                            configuration="MMsatStat"
+                            configuration="SubSysStat"
                             configurationApi="MMSATSTAT_PROCESSING"
                             checked={!!MMsatStatMap["MMSATSTAT_PROCESSING"]} 
                             loading={loading}

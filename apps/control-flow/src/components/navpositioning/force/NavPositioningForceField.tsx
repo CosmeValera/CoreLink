@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
-import NavPrsForceDialog from "./NavPrsForceDialog";
+import NavPositioningForceDialog from "./NavPositioningForceDialog";
 
-export default function NavPrsForceField(props: { configuration: string, enable: boolean }) {
+export default function NavPositioningForceField(props: { configuration: string, enable: boolean }) {
     const [textFieldvalue, setTextFieldValue] = useState<string>('');    
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
@@ -13,7 +13,7 @@ export default function NavPrsForceField(props: { configuration: string, enable:
 
     return (
         <div className="flex align-items-center mt-5 gap-3">
-            {isModalVisible && <NavPrsForceDialog visible={isModalVisible} setIsModalVisible={setIsModalVisible} onFileSelect={handleFileReceived}/>}
+            {isModalVisible && <NavPositioningForceDialog visible={isModalVisible} setIsModalVisible={setIsModalVisible} onFileSelect={handleFileReceived}/>}
 
             <div className="flex justify-content-center flex-grow-1">
                 <span className="p-float-label w-full">

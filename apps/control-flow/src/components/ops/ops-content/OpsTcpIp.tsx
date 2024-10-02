@@ -27,7 +27,7 @@ export default function StmTcpIp(props: ClickEnableProps) {
                     <span className={toggleIcon}></span>
                     <Ripple />
                 </button>
-                <span className={titleClassName} style={style}>TCP-IP KMF Connections</span>
+                <span className={titleClassName} style={style}>TCP-IP Command Connections</span>
             </div>
         );
     };

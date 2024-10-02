@@ -7,7 +7,7 @@ import { Dialog } from "primereact/dialog";
 import { ListBox } from 'primereact/listbox';
 import { Button } from "primereact/button";
 
-export default function NavPrsForceDialog(props: {visible: boolean, setIsModalVisible: (visible: boolean) => void, onFileSelect: (file: string) => void}) {
+export default function NavPositioningForceDialog(props: {visible: boolean, setIsModalVisible: (visible: boolean) => void, onFileSelect: (file: string) => void}) {
     const { loading, data: files, error }: {loading: boolean, data: {children: string[]}, error: boolean } = useFetch("316", "prime", ServiceType.FILE);
     const [selectedFile, setSelectedFile] = useState<string>('');
     const { fetchCheckIsFile, showToast } = useApp();

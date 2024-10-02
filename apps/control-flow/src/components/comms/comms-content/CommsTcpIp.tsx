@@ -17,7 +17,7 @@ export default function StcTCPIP({configuration, loading}: any) {
                     <span className={toggleIcon}></span>
                     <Ripple />
                 </button>
-                <span className={titleClassName} style={style}>TCP-IP KMF Connections</span>
+                <span className={titleClassName} style={style}>TCP-IP Command Connections</span>
             </div>
         );
     };
@@ -25,17 +25,17 @@ export default function StcTCPIP({configuration, loading}: any) {
     return (
         <Panel headerTemplate={template} toggleable>
             <InputActive
-                name="M-KMF data channel"
+                name="Ping Data Channel"
                 status={!!configuration['CMD_KMF_STC_MKMF_LINK_STATUS']}
                 loading={loading}
             />
             <InputActive
-                name="P-KMF data channel"
+                name="Acoustic Command Channel"
                 status={!!configuration['CMD_KMF_STC_PKMF_LINK_STATUS']}
                 loading={loading}
             />
             <InputActive
-                name="GCS-KMF data channel"
+                name="Telemetry Data Channel"
                 status={!!configuration['CMD_KMF_STC_SKMF_LINK_STATUS']}
                 loading={loading}
             />

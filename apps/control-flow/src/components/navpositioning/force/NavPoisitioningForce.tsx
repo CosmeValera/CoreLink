@@ -1,9 +1,9 @@
 import React from 'react'; 
 import { Panel, PanelHeaderTemplateOptions } from 'primereact/panel';
 import { Ripple } from 'primereact/ripple';
-import NavPrsForceField from './NavPrsForceField';
+import NavPositioningForceField from './NavPositioningForceField';
 
-export default function NavPrsForce({enable}: {enable: boolean}) {
+export default function NavPositioningForce({enable}: {enable: boolean}) {
     const template = (options: PanelHeaderTemplateOptions) => {
         const toggleIcon = options.collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up';
         const className = `${options.className} justify-content-start px-1 py-1`;
@@ -23,9 +23,9 @@ export default function NavPrsForce({enable}: {enable: boolean}) {
 
     return (
         <Panel headerTemplate={template} toggleable>
-            <NavPrsForceField configuration="OS" enable={enable} />
-            <NavPrsForceField configuration="GNAV" enable={enable} />
-            <NavPrsForceField configuration="GNAV9" enable={enable} />
+            <NavPositioningForceField configuration="SONAR Override" enable={enable} />
+            <NavPositioningForceField configuration="GPS Override" enable={enable} />
+            <NavPositioningForceField configuration="Depth Control Override" enable={enable} />
         </Panel>
     )
 }
