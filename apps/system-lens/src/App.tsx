@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from 'react-dom/client';
 
-import MainContainer from './Main';
+import Main from './Main';
 
 // async function deferRender() {
 //     // if (process.env.NODE_ENV !== 'development') {
@@ -19,7 +19,7 @@ import MainContainer from './Main';
     const root = createRoot(rootElement);
     root.render(
         // <React.StrictMode>
-            <MainContainer satellites={["316"]}/>
+            <Main satellites={["316"]}/>
         // </React.StrictMode>,
     );
 // })

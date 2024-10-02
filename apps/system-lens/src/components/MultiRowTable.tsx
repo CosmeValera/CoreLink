@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, ReactText, ReactNode, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, ReactText, ReactNode, useRef } from 'react';
 
 import { Tag } from 'primereact/tag';
 import { Tooltip } from 'primereact/tooltip';
@@ -8,7 +8,7 @@ import { MRT_AggregationFn, MRT_ColumnDef, MRT_RowSelectionState, MRT_TablePagin
 import { Box, Button, darken } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-import { fetchGetAllDomains } from '../service/fetchService';
+import { fetchGetAllDomains, fetchPostAction } from '../service/fetchService';
 import { useAdaptiveCardHeight } from '../helpers/useAdaptiveCardHeight';
 
 interface ProcessSumary {
@@ -28,12 +28,12 @@ interface Process {
 export default function MultiRowTable(props: { domains: string[] }) {
 	const [processes, setProcesses] = useState<Process[]>([]);
 	const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
-    const toast = useRef<Toast>(null);
+	const toast = useRef<Toast>(null);
 
 	const cardRef = useRef<HTMLDivElement>(null);
-	const cardContentHeight = useAdaptiveCardHeight(cardRef)
+	const { updateHeightsStates, calculateTableContentHeight } = useAdaptiveCardHeight(cardRef);
 
-	const darkTheme = createTheme({ 
+	const darkTheme = createTheme({
 		palette: { mode: 'dark' },
 		components: {
 			MuiButton: {
@@ -42,20 +42,27 @@ export default function MultiRowTable(props: { domains: string[] }) {
 						borderRadius: 9999,
 					}
 				}
-			}, 
-	    },  
+			},
+		},
 	});
-	
+
 	useEffect(() => {
-		makeFetchCall()
+		makeFetchCall();
 	}, []);
 
 	const makeFetchCall = () => {
 		fetchGetAllDomains(props.domains)
-			.then(res => {
-				setProcesses(res);
-			}).catch(error => console.log(error))
+			.then(async res => {
+				setProcesses(res)
+			})
+			.catch(error => console.log(error))
 	}
+
+	useEffect(() => {
+		if (processes.length > 0) {
+			updateHeightsStates();
+		}
+	}, [processes]);
 
 	const getStatusStyle = (status: string) => {
 		switch (status) {
@@ -74,25 +81,25 @@ export default function MultiRowTable(props: { domains: string[] }) {
 		}
 	};
 
-	const statusBodyTemplate = (status: ReactNode) => {
+	const statusProcessTemplate = (status: ReactNode) => {
 		return <Tag value={status} className={getStatusStyle((status as ReactText).toString())} />;
 	};
 
-	const badgeTemplate = (value: number, state: string) => {
-		const capitalizedState  = state.charAt(0).toUpperCase() + state.slice(1).toLowerCase().replace(/_/g, " ")
+	const statusTagTemplate = (value: number, state: string) => {
+		const capitalizedState = state.charAt(0).toUpperCase() + state.slice(1).toLowerCase().replace(/_/g, " ")
 		return <>
-				<Tooltip target={`.${state}`} content={{state}} position='bottom' className='tooltip'/>
-				<Tag value={value} className={`${getStatusStyle(state)} ${state}`} data-pr-tooltip={capitalizedState}/>
-			</>
+			<Tooltip target={`.${state}`} content={{ state }} position='bottom' className='tooltip' />
+			<Tag value={value} className={`${getStatusStyle(state)} ${state}`} data-pr-tooltip={capitalizedState} />
+		</>
 	};
 
-	const summaryBodyTemplate = (summary: ProcessSumary) => {
+	const statusDomainTemplate = (summary: ProcessSumary) => {
 		return <div className='inline-flex gap-1'>
-			{badgeTemplate(summary.starting, 'STARTING')}
-			{badgeTemplate(summary.running, 'RUNNING')}
-			{badgeTemplate(summary.runningWithConnectionIssues, 'RUNNING_WITH_CONNECTION_ISSUES')}
-			{badgeTemplate(summary.crashed, 'CRASHED')}
-			{badgeTemplate(summary.stopped, 'STOPPED')}
+			{statusTagTemplate(summary.starting, 'STARTING')}
+			{statusTagTemplate(summary.running, 'RUNNING')}
+			{statusTagTemplate(summary.runningWithConnectionIssues, 'RUNNING_WITH_CONNECTION_ISSUES')}
+			{statusTagTemplate(summary.crashed, 'CRASHED')}
+			{statusTagTemplate(summary.stopped, 'STOPPED')}
 		</div>
 	};
 
@@ -124,10 +131,10 @@ export default function MultiRowTable(props: { domains: string[] }) {
 			{
 				header: 'Status',
 				accessorKey: 'status',
-				Cell: ({ cell }) => <> {statusBodyTemplate(cell.getValue<string>())} </>,
+				Cell: ({ cell }) => <> {statusProcessTemplate(cell.getValue<string>())} </>,
 				aggregationFn: statusAggregationFn,
 				AggregatedCell: ({ cell }) => <> {cell.row.groupingColumnId === 'domain' ?
-					summaryBodyTemplate(cell.getValue<ProcessSumary>()) : undefined} </>,
+					statusDomainTemplate(cell.getValue<ProcessSumary>()) : undefined} </>,
 				filterVariant: 'multi-select',
 				filterSelectOptions: ['STARTING', 'RUNNING', 'RUNNING_WITH_CONNECTION_ISSUES', 'CRASHED', 'STOPPED'],
 			},
@@ -137,12 +144,14 @@ export default function MultiRowTable(props: { domains: string[] }) {
 
 	const table = useMaterialReactTable({
 		columns,
-		data: processes,
+		data: useMemo(() => processes, [processes]),
 		enableGrouping: true,
 		enablePagination: true,
 		enableStickyHeader: true,
 		enableRowSelection: true,
-		onRowSelectionChange: setRowSelection, 
+		enableDensityToggle: false,
+		enableFullScreenToggle: false,
+		onRowSelectionChange: setRowSelection,
 		state: { rowSelection },
 		initialState: {
 			expanded: props.domains.length === 1,
@@ -150,133 +159,163 @@ export default function MultiRowTable(props: { domains: string[] }) {
 			pagination: { pageIndex: 0, pageSize: 50 },
 			density: 'compact'
 		},
-		muiToolbarAlertBannerProps: { 
+
+		// Top Toolbar
+		renderToolbarAlertBannerContent: ({ table, groupedAlert, selectedAlert }) => (
+			<div className='w-full flex flex-column px-3 gap-1'>
+				{groupedAlert}
+				{selectedAlert}
+			</div>
+		)
+		,
+		muiTopToolbarProps: {
 			sx: {
-			  backgroundColor: '#191919',
-			  color: '#F6F6F6',
-			  '& .MuiButtonBase-root.MuiButton-root': {
-				color: '#999999',
-				fontWeight: 'bold',
-			  },
-			  '& .MuiButtonBase-root.MuiChip-root': {
-				color: '#F6F6F6',
-			  }
+				height: "80px",
+				backgroundColor: 'var(--surface-ground)',
+				'& .Mui-ToolbarDropZone.MuiBox-root + .MuiBox-root': {
+					display: 'flex',
+					alignItems: 'center',
+					height: 'inherit'
+				},
 			}
-		  }, // Grouped by row
-		muiTableHeadRowProps: { sx: { backgroundColor: '#191919'}}, // header row
-		muiTopToolbarProps: { sx: { backgroundColor: '#191919'}}, // empty toptoolbar
-		muiTableContainerProps: { sx: { height: cardContentHeight }}, // table content
+		},
+		// Top Toolbar-> Div with Grouped by Row & Rows Selected
+		muiToolbarAlertBannerProps: {
+			sx: {
+				height: "80px",
+				backgroundColor: 'var(--surface-ground)',
+				color: 'var(--primary-color-text)',
+				'& .MuiAlert-message': {
+					display: 'flex',
+					alignItems: 'center',
+					'& .MuiButtonBase-root.MuiButton-root': {
+						color: 'var(--text-color-secondary)',
+						fontWeight: 'bold',
+					},
+					'& .MuiButtonBase-root.MuiChip-root': {
+						color: 'var(--primary-color-text)',
+					}
+				},
+			}
+		},
+		// Header row
+		muiTableHeadRowProps: { sx: { backgroundColor: 'var(--surface-0)' } },
+		// Table
+		muiTableContainerProps: { sx: { height: () => calculateTableContentHeight() } },
+		// Table rows
 		muiTableBodyRowProps: ({ row, staticRowIndex, table }) => ({
 			onClick: (event) =>
 				getMRT_RowSelectionHandler()({ event, row, staticRowIndex, table }),
 			sx: { cursor: 'pointer' },
 		}),
-		enableDensityToggle: false,
-		enableFullScreenToggle: false,
-		renderBottomToolbar: ({ table }) => {
 
-			// const makePostCall = async (action: string, selectedRowsNamesAndDomains: {domain: string, name: string}[]) => {
-			// 	const promises = selectedRowsNamesAndDomains.map(({ domain, name }) => {
-			// 		return fetchPostAction(domain, name, action)
-			// 			.catch(err => {
-			// 				throw new Error(`Action failed. Status: ${err.status}. StatusText: ${err.statusText}`);
-			// 			});
-			// 	});
+		renderBottomToolbar: useCallback(() => {
 
-			// 	await Promise.all(promises);
-			// };
-
-			const checkStatusAndRefreshRecursively = async (status: string, selectedRowsNamesAndDomains: {domain: string, name: string}[]) => {
-				// makeFetchCall();
-
-				const areAllProcessesChanged = selectedRowsNamesAndDomains.every(({ domain, name }) => {
-					const selectedRow = table.getSelectedRowModel().flatRows.find(row => row.original.domain === domain && row.original.name === name);
-					return selectedRow && selectedRow.original.status === status;
+			const makePostCall = async (action: string, selectedRowsNamesAndDomains: { domain: string, name: string }[]) => {
+				const promises = selectedRowsNamesAndDomains.map(({ domain, name }) => {
+					return fetchPostAction(domain, name, action)
+						.catch(err => {
+							throw new Error(`Action failed. Status: ${err.status}. StatusText: ${err.statusText}`);
+						});
 				});
 
-				if (areAllProcessesChanged) {
-					const processesNames = selectedRowsNamesAndDomains.map(({ name }) => name).join(', ');
-					toast.current?.show({severity:'info', summary: 'Info', detail:<p>{status}: <strong>{processesNames}</strong></p>, life: 3000});
-				} else {
-					await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before checking again
-					await checkStatusAndRefreshRecursively(status, selectedRowsNamesAndDomains);
-				}
+				await Promise.all(promises);
 			};
+
+			// const checkStatusAndRefreshRecursively = async (status: string, selectedRowsNamesAndDomains: { domain: string, name: string }[]) => {
+			// 	makeFetchCall();
+
+			// 	const areAllProcessesChanged = selectedRowsNamesAndDomains.every(({ domain, name }) => {
+			// 		const selectedRow = table.getSelectedRowModel().flatRows.find(row => row.original.domain === domain && row.original.name === name);
+			// 		return selectedRow && selectedRow.original.status === status;
+			// 	});
+
+			// 	if (areAllProcessesChanged) {
+			// 		const processesNames = selectedRowsNamesAndDomains.map(({ name }) => name).join(', ');
+			// 		toast.current?.show({ severity: 'info', summary: 'Info', detail: <p>{status}: <strong>{processesNames}</strong></p>, life: 3000 });
+			// 	} else {
+			// 		await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before checking again
+			// 		await checkStatusAndRefreshRecursively(status, selectedRowsNamesAndDomains);
+			// 	}
+			// };
 
 			const handleAction = async (action: string, status: string) => {
 				const selectedRows = table.getSelectedRowModel().flatRows;
-				const selectedRowsNamesAndDomains = selectedRows.map(row => ({ domain: row.original.domain, name: row.original.name,  }));
+				const selectedRowsNamesAndDomains = selectedRows.map(row => ({ domain: row.original.domain, name: row.original.name, }));
 				const processesNames = selectedRowsNamesAndDomains.map(({ name }) => name).join(', ');
 				
-				toast.current?.show({severity:'info', summary: 'Info', detail:<p>{status}: <strong>{processesNames}</strong></p>, life: 3000});
+				toast.current?.show({ severity: 'info', summary: 'Error', detail: <p>{action} succesful: <strong>{processesNames}</strong></p>, life: 3000 });
+
 				// try {
-				// 	// await makePostCall(action, selectedRowsNamesAndDomains);
+				// 	await makePostCall(action, selectedRowsNamesAndDomains);
 				// 	await checkStatusAndRefreshRecursively(status, selectedRowsNamesAndDomains);
 				// } catch (error) {
 				// 	const processesNames = selectedRowsNamesAndDomains.map(({ name }) => name).join(', ');
-				// 	toast.current?.show({severity:'error', summary: 'Error', detail:<p>{action} failed: <strong>{processesNames}</strong></p>, life: 3000});
+				// 	toast.current?.show({ severity: 'error', summary: 'Error', detail: <p>{action} failed: <strong>{processesNames}</strong></p>, life: 3000 });
 				// }
 			};
-			
+
 			const handleStart = async () => {
 				await handleAction('START', 'RUNNING');
 			};
-			
+
 			const handleStop = async () => {
 				await handleAction('STOP', 'STOPPED');
 			};
 
 			const handleRestart = async () => {
-				await handleStop();
-				await handleStart();
+				// await handleStop();
+				// await handleStart();
+				await handleAction('RESTART', 'RESTARTED');
 			};
 
 			return (
 				<Box
-				sx={(theme) => ({
-				  backgroundColor: darken(theme.palette.background.default, 0.05),
-				  alignItems: 'center',
-				  display: 'flex',
-				  gap: '0.5rem',
-				  p: '8px',
-				  background: '#191919',
-				  justifyContent: 'space-between',
-				})}
-			  >
-				<Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-				  <MRT_TablePagination table={table} />
+					sx={(theme) => ({
+						backgroundColor: darken(theme.palette.background.default, 0.05),
+						alignItems: 'center',
+						display: 'flex',
+						gap: '0.5rem',
+						p: '8px',
+						background: 'var(--surface-0)',
+						justifyContent: 'space-between',
+						height: "68px",
+					})}
+				>
+					<Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+						<MRT_TablePagination table={table} />
+					</Box>
+					<Box>
+						<Box sx={{ display: 'flex', gap: '0.5rem' }}>
+							<Button
+								className={!table.getIsSomeRowsSelected() ? '' : 'bg-red-500 hover:bg-red-600 text-white'}
+								disabled={!table.getIsSomeRowsSelected()}
+								onClick={handleStart}
+								variant="contained"
+							>
+								Start
+							</Button>
+							<Button
+								className={!table.getIsSomeRowsSelected() ? '' : 'bg-red-500 hover:bg-red-600 text-white'}
+								disabled={!table.getIsSomeRowsSelected()}
+								onClick={handleStop}
+								variant="contained"
+							>
+								Stop
+							</Button>
+							<Button
+								className={!table.getIsSomeRowsSelected() ? '' : 'bg-red-500 hover:bg-red-600 text-white'}
+								disabled={!table.getIsSomeRowsSelected()}
+								onClick={handleRestart}
+								variant="contained"
+							>
+								Restart
+							</Button>
+						</Box>
+					</Box>
 				</Box>
-				<Box>
-				  <Box sx={{ display: 'flex', gap: '0.5rem'}}>
-					<Button
-					  className={!table.getIsSomeRowsSelected() ? '': 'bg-red-500 hover:bg-red-600 text-white'}
-					  disabled={!table.getIsSomeRowsSelected()}
-					  onClick={handleStart}
-					  variant="contained"
-					>
-					  Start
-					</Button>
-					<Button
-					  className={!table.getIsSomeRowsSelected() ? '': 'bg-red-500 hover:bg-red-600 text-white'}
-					  disabled={!table.getIsSomeRowsSelected()}
-					  onClick={handleStop}
-					  variant="contained"
-					>
-					  Stop
-					</Button>
-					<Button
-					  className={!table.getIsSomeRowsSelected() ? '': 'bg-red-500 hover:bg-red-600 text-white'}
-					  disabled={!table.getIsSomeRowsSelected()}
-					  onClick={handleRestart}
-					  variant="contained"
-					>
-					  Restart
-					</Button>
-				  </Box>
-				</Box>
-			  </Box>
 			);
-		}
+		}, [])
 	});
 
 	return (

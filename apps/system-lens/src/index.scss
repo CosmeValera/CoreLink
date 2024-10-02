@@ -1,4 +1,4 @@
-@import '../../../packages/style/themes/gmv-theme/variables';
+@import '../style/themes/gmv-theme/variables';
 
 //////////////////////////////
 //// Material React Table ////
@@ -17,13 +17,13 @@ tr.MuiTableRow-root.Mui-selected:hover td::after {
 
 td span.MuiButtonBase-root.MuiCheckbox-root, 
 td span.MuiButtonBase-root.MuiCheckbox-root {
-  color: $secondaryGray;
+  color: $gmvTextGray;
 }
 td span.MuiButtonBase-root.MuiCheckbox-root.Mui-checked, 
 td span.MuiButtonBase-root.MuiCheckbox-root.MuiCheckbox-indeterminate,
 div span.MuiButtonBase-root.MuiCheckbox-root.Mui-checked,
 div span.MuiButtonBase-root.MuiCheckbox-root.MuiCheckbox-indeterminate {
-  color: map-get($colors, "green");
+  color: $gmvOtherGreen;
 }
 //// END: TABLE ROW ////
 
