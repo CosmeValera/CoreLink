@@ -7,6 +7,7 @@ import "primereact/resources/primereact.css";
 import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";
 import "./index.scss";
+import "./hide-overlay.scss";
 
 import MultiRowTable from "./components/MultiRowTable";
 
