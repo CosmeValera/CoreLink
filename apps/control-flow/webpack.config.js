@@ -18,6 +18,7 @@ module.exports = (_, argv) => ({
 
   devServer: {
     port: 3002,
+    allowedHosts: ['.csb.app'],
     historyApiFallback: true,
     watchFiles: [path.resolve(__dirname, 'src')],
     onListening: function (devServer) {

@@ -21,6 +21,9 @@ coverage
 # Vercel
 .vercel
 
+# CodeSandBox
+tasks.json
+
 # Build Outputs
 .next/
 out/
