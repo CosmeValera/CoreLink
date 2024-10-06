@@ -4,10 +4,6 @@
     {
       "name": "Install Dependencies",
       "command": "npm install"
-    },
-    {
-      "name": "Start Application",
-      "command": "npm start"
     }
   ],
 
